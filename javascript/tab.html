@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>tab</title>
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        #tabBox {
+            box-sizing: border-box;
+            margin: 20px auto;
+            width: 500px;
+        }
+
+        #navBox {
+            display: flex;
+            position: relative;
+            top: 1px;
+        }
+
+        #navBox li {
+            box-sizing: border-box;
+            margin-right: 10px;
+            padding: 0 10px;
+            line-height: 35px;
+            border: 1px solid #999;
+            cursor: pointer;
+        }
+
+        #navBox li.active {
+            border-bottom-color: #fff;
+        }
+
+        #tabBox > div {
+            display: none;
+            box-sizing: border-box;
+            padding: 10px;
+            height: 150px;
+            border: 1px solid #999;
+        }
+
+        #tabBox > div.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+<div id="tabBox">
+    <ul id="navBox">
+        <li class="active">aaa</li>
+        <li>bbb</li>
+        <li>ccc</li>
+    </ul>
+    <div class="active">aaa</div>
+    <div>bbb</div>
+    <div>ccc</div>
+</div>
+
+<script>
+    var tabBox = document.querySelector('#tabBox')
+    var navList = document.querySelectorAll('#navBox li')
+    var divList = tabBox.querySelectorAll('div')
+
+    var changeTab = function (n) {
+        for (var i = 0; i < navList.length; i++) {
+            navList[i].className = ''
+            divList[i].className = ''
+        }
+        navList[n].className = 'active'
+        divList[n].className = 'active'
+    }
+
+    for (var i = 0; i < navList.length; i++) {
+        navList[i].onclick = (function (n) {
+            return function () {
+                changeTab(n)
+            }
+        })(i)
+    }
+</script>
+</body>
+</html>
